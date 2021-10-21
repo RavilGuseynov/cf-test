@@ -9,12 +9,14 @@ import About from "./components/about";
 
 function App() {
   const { tickersStore } = useContext(StoresContext);
+  console.log(tickersStore.loading)
+  console.log('has tickers', !!Object.keys(tickersStore.tickers).length);
   return (
     <div className="App">
       <Router>
 
         <Header />
-        {tickersStore.hasError && <div>Ошибка!</div>}
+        {tickersStore.hasError && <div className="error">Ошибка</div>}
         <Switch>
 
           <Route path="/tickers">

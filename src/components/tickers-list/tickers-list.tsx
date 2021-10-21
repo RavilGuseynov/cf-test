@@ -3,10 +3,12 @@ import {observer} from "mobx-react-lite";
 import {StoresContext} from "../../index";
 import TickerItem from "../ticker-item";
 import "./index.css"
+import Loader from "../loader";
 
 const TickersList: React.FC = () => {
 
   const { tickersStore } = useContext(StoresContext);
+  const { hasError, loading } = tickersStore;
 
   useEffect(() => {
     tickersStore.fetchTickers();
@@ -28,20 +30,24 @@ const TickersList: React.FC = () => {
 
   return (
     <Fragment>
-      <table className="table">
-        <thead>
-          <tr className="table-row">
-            <th>Ticker name</th>
-            <th>last</th>
-            <th>highestBid</th>
-            <th>highestBid</th>
-            <th>percentChange</th>
-          </tr>
-        </thead>
-        <tbody>
-          {renderTickersList()}
-        </tbody>
-      </table>
+      {!hasError &&
+        loading
+        ? <Loader />
+        : <table className="table">
+          <thead>
+            <tr className="table-row">
+              <th>Ticker name</th>
+              <th>last</th>
+              <th>highestBid</th>
+              <th>highestBid</th>
+              <th>percentChange</th>
+            </tr>
+          </thead>
+          <tbody>
+            {renderTickersList()}
+          </tbody>
+        </table>
+      }
     </Fragment>
   )
 }

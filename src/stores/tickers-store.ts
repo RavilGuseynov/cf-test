@@ -7,7 +7,8 @@ export class TickersStore {
   private tickersData: ITickersData = {};
   private modalVisible = false;
   private timer: NodeJS.Timeout | null = null;
-  private isError= false;
+  private isError = false;
+  private fetching = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -20,15 +21,24 @@ export class TickersStore {
   }
 
   public async fetchTickers() {
+    this.fetching = true;
     try {
       const response = await getTickers();
       runInAction(() => {
-        this.tickersData = response.data;
-        this.isError = false;
+        if (response.data.hasOwnProperty('error')) {
+          this.isError = true;
+        } else {
+          this.tickersData = response.data;
+          this.isError = false;
+        }
       })
     } catch (error) {
       this.isError = true;
       console.error(error);
+    } finally {
+      runInAction(() => {
+        this.fetching = false;
+      })
     }
     this.timer = setTimeout(async () => {
       await this.fetchTickers()
@@ -49,6 +59,10 @@ export class TickersStore {
 
   public get hasError(): boolean {
     return this.isError;
+  }
+
+  public get loading(): boolean {
+    return this.fetching && !Object.keys(this.tickersData).length;
   }
 }
 

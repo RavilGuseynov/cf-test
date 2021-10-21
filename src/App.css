@@ -3,5 +3,9 @@
 }
 
 .error {
+  margin: 70px 0 0;
   color: red;
+  font-size: 20px;
+  font-weight: bold;
+  /*line-height: 500;*/
 }
