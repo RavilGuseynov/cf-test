@@ -1,0 +1,14 @@
+.table-row-body {
+  cursor: pointer;
+}
+
+.table-row-body:hover {
+  background-color: #e3e3e3;
+}
+
+.model {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background-color: #61dafb;
+}

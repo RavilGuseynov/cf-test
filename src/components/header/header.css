@@ -1,0 +1,21 @@
+.header {
+  display: flex;
+  justify-content: space-evenly;
+  height: 50px;
+  background-color: #20232a;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.header-link {
+  text-decoration: none;
+  color: #ffffff;
+  white-space: nowrap;
+  font-size: 20px;
+}
+.header-link:hover {
+  color: #61dafb;
+}

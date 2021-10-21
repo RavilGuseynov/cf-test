@@ -1,0 +1,10 @@
+.table {
+  width: 700px;
+  margin: 50px auto;
+  border-collapse: collapse;
+}
+
+.table-row {
+  height: 40px;
+  border-bottom: 1px solid #999999;
+}
